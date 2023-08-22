@@ -1,21 +1,26 @@
 package org.example.modelos;
 
+import org.example.utilidades.Util;
+import org.example.validaciones.OfertaValidacion;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Oferta {
     private int id;
     private String titulo;
     private String descripcion;
-    private Date FechaInicio;
-    private Date FechaFin;
+    private LocalDate FechaInicio;
+    private LocalDate FechaFin;
     private Double costopersona;
     private int idlocal;
 
-
+    OfertaValidacion validacion = new OfertaValidacion();
+private Util util=new Util();
     public Oferta() {
     }
 
-    public Oferta(int id, String titulo, String descripcion, Date fechaInicio, Date fechaFin, Double costopersona, int idlocal) {
+    public Oferta(int id, String titulo, String descripcion, LocalDate fechaInicio, LocalDate fechaFin, Double costopersona, int idlocal) {
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -50,8 +55,14 @@ public class Oferta {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTitulo(String titulo){
+        try{
+            this.validacion.validarTitulo(titulo);
+            this.titulo=titulo;
+
+        }catch (Exception error){
+            System.out.println(error.getMessage());
+        }
     }
 
     public String getDescripcion() {
@@ -62,20 +73,32 @@ public class Oferta {
         this.descripcion = descripcion;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return FechaInicio;
     }
 
-    public void setFechaInicio(Date fechaInicio) {
-        FechaInicio = fechaInicio;
+    public void setFechaInicio(String fechaInicio) {
+        try{
+            this.validacion.validarFormatoFechas(fechaInicio);
+            this.FechaInicio=this.util.convertitStringEnLocalDate(fechaInicio);
+        }catch (Exception error){
+            System.out.println(error.getMessage());
+        }
     }
 
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return FechaFin;
     }
 
-    public void setFechaFin(Date fechaFin) {
-        FechaFin = fechaFin;
+    public void setFechaFin(String FechaFin) {
+        try {
+            this.validacion.validarFormatoFechas(FechaFin);
+            this.validacion.validarTodasFechas(this.FechaInicio, this.util.convertitStringEnLocalDate(FechaFin));
+            this.FechaInicio = this.util.convertitStringEnLocalDate(FechaFin);
+        }catch (Exception error){
+            System.out.println(error.getMessage());
+        }
+
     }
 
     public Double getCostopersona() {
@@ -83,7 +106,13 @@ public class Oferta {
     }
 
     public void setCostopersona(Double costopersona) {
-        this.costopersona = costopersona;
+        try {
+            this.validacion.validarCostoPersona(costopersona);
+            this.costopersona = costopersona;
+
+        } catch (Exception error) {
+            System.out.println(error.getMessage());
+        }
     }
 
     public int getIdlocal() {
