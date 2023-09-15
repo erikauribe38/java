@@ -27,13 +27,13 @@ public class UsuarioValidacion {
         if (ubicacion == 1 || ubicacion == 2 || ubicacion == 3 || ubicacion == 4) {
             return true;
         } else {
-            throw new Exception("error");
+            throw new Exception(Mensaje.VALIDAR_UBICACION.getMensaje());
         }
     }
 
     public Boolean validarCorreo(String correo) throws Exception {
-        if (!util.buscarConcidencia(correo, "^[\\w-+]+(\\.[\\w-]{1,62}){0,126}@[\\w-]{1,63}(\\.[\\w-]{1,62})+/[\\w-]+$")) {
-            throw new Exception("revise el estado del corre");
+        if (!util.buscarConcidencia(correo, "^[A-Za-z0-9+_.-]+@(.+)$")) {
+            throw new Exception(Mensaje.VALIDACION_CORREO.getMensaje());
         }
         return true;
     }

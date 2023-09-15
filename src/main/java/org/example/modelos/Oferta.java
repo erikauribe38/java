@@ -1,21 +1,21 @@
 package org.example.modelos;
 
-import org.example.utilidades.Util;
 import org.example.validaciones.OfertaValidacion;
 
-import java.time.LocalDate;
 import java.util.Date;
+import org.example.utilidades.Util;
+import java.time.LocalDate;
 
 public class Oferta {
     private int id;
     private String titulo;
     private String descripcion;
-    private LocalDate FechaInicio;
-    private LocalDate FechaFin;
+    private LocalDate fechaInicio;
+    private LocalDate fechaFin;
     private Double costopersona;
     private int idlocal;
 
-    OfertaValidacion validacion = new OfertaValidacion();
+private OfertaValidacion validacion=new OfertaValidacion();
 private Util util=new Util();
     public Oferta() {
     }
@@ -24,8 +24,8 @@ private Util util=new Util();
         this.id = id;
         this.titulo = titulo;
         this.descripcion = descripcion;
-        FechaInicio = fechaInicio;
-        FechaFin = fechaFin;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
         this.costopersona = costopersona;
         this.idlocal = idlocal;
     }
@@ -36,8 +36,8 @@ private Util util=new Util();
                 "id=" + id +
                 ", titulo='" + titulo + '\'' +
                 ", descripcion='" + descripcion + '\'' +
-                ", FechaInicio=" + FechaInicio +
-                ", FechaFin=" + FechaFin +
+                ", FechaInicio=" + fechaInicio +
+                ", FechaFin=" + fechaFin +
                 ", costopersona=" + costopersona +
                 ", idlocal=" + idlocal +
                 '}';
@@ -55,11 +55,11 @@ private Util util=new Util();
         return titulo;
     }
 
-    public void setTitulo(String titulo){
-        try{
+    public void setTitulo(String titulo) {
+
+        try {
             this.validacion.validarTitulo(titulo);
             this.titulo=titulo;
-
         }catch (Exception error){
             System.out.println(error.getMessage());
         }
@@ -74,31 +74,31 @@ private Util util=new Util();
     }
 
     public LocalDate getFechaInicio() {
-        return FechaInicio;
+        return fechaInicio;
     }
 
     public void setFechaInicio(String fechaInicio) {
-        try{
+        try {
             this.validacion.validarFormatoFechas(fechaInicio);
-            this.FechaInicio=this.util.convertitStringEnLocalDate(fechaInicio);
+            this.fechaInicio=this.util.convertitStringEnLocalDate(fechaInicio);
+
         }catch (Exception error){
             System.out.println(error.getMessage());
         }
     }
 
     public LocalDate getFechaFin() {
-        return FechaFin;
+        return fechaFin;
     }
 
-    public void setFechaFin(String FechaFin) {
+    public void setFechaFin(String fechaFin) {
         try {
-            this.validacion.validarFormatoFechas(FechaFin);
-            this.validacion.validarTodasFechas(this.FechaInicio, this.util.convertitStringEnLocalDate(FechaFin));
-            this.FechaInicio = this.util.convertitStringEnLocalDate(FechaFin);
+            this.validacion.validarFormatoFechas(fechaFin);
+            this.validacion.validarTodasFechas(this.fechaInicio,this.util.convertitStringEnLocalDate(fechaFin));
+            this.fechaInicio = this.util.convertitStringEnLocalDate(fechaFin);
         }catch (Exception error){
             System.out.println(error.getMessage());
         }
-
     }
 
     public Double getCostopersona() {
@@ -108,9 +108,8 @@ private Util util=new Util();
     public void setCostopersona(Double costopersona) {
         try {
             this.validacion.validarCostoPersona(costopersona);
-            this.costopersona = costopersona;
-
-        } catch (Exception error) {
+            this.costopersona=costopersona;
+        }catch (Exception error){
             System.out.println(error.getMessage());
         }
     }

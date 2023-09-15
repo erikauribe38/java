@@ -3,8 +3,8 @@ package org.example.modelos;
 import org.example.utilidades.Util;
 import org.example.validaciones.ReservaValidacion;
 
-import java.time.LocalDate;
 import java.util.Date;
+import java.time.LocalDate;
 
 public class Reserva {
     private int id;
@@ -12,10 +12,9 @@ public class Reserva {
     private int idoferta;
     private double costototal;
     private LocalDate fechareserva;
-
+private ReservaValidacion validacion=new ReservaValidacion();
+    private Util util=new Util();
     private int numeropersonas;
-    private ReservaValidacion validacion = new ReservaValidacion();
-    private Util util = new Util();
 
     public Reserva() {
     }
@@ -77,12 +76,11 @@ public class Reserva {
         return fechareserva;
     }
 
-    public void setFechareserva(String fechareserva) {
+    public void setFechareserva(String fechareserva){
         try {
-            this.validacion.validarfecha(fechareserva);
-            this.fechareserva = this.util.convertitStringEnLocalDate(fechareserva);
-
-        } catch (Exception error) {
+            this.validacion.validarFormatoFechas(fechareserva);
+            this.fechareserva=this.util.convertitStringEnLocalDate(fechareserva);
+        }catch(Exception error){
             System.out.println(error.getMessage());
         }
     }
@@ -95,11 +93,9 @@ public class Reserva {
     public void setNumeropersonas(int numeropersonas) {
         try {
             this.validacion.validarNumeroPersonas(numeropersonas);
-            this.numeropersonas = numeropersonas;
-        } catch (Exception error) {
-            System.out.println(error.getMessage());
+            this.numeropersonas=numeropersonas;
+        }catch (Exception errror){
+            System.out.println(errror.getMessage());
         }
     }
 }
-
-

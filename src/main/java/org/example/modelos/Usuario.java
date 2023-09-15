@@ -65,19 +65,28 @@ public class Usuario {
        }
     }
 
-    public int getUbicacion() {
-        return ubicacion;
+    public int getUbicacion() {return ubicacion;
     }
 
     public void setUbicacion(int ubicacion) {
-        this.ubicacion = ubicacion;
+        try {
+            this.validacion.validarUbicacion(ubicacion);
+            this.ubicacion=ubicacion;
+        }catch (Exception error){
+            System.out.println(error.getMessage());
+        }
     }
 
     public String getCorreoElectronico() {
         return correoElectronico;
     }
 
-    public void setCorreoElectronico(String correoElectronico) {
-        this.correoElectronico = correoElectronico;
+    public void setCorreoElectronico(String correoElectronico){
+        try {
+            this.validacion.validarCorreo(correoElectronico);
+            this.correoElectronico=correoElectronico;
+        }catch (Exception error){
+            System.out.println(error.getMessage());
+        }
     }
 }

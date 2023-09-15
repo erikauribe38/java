@@ -9,7 +9,9 @@ public class Local {
     private String nombre;
     private int ubicacion;
     private String descripcion;
-    private LocalValidacion validacion = new LocalValidacion();
+
+    private LocalValidacion validacion=new LocalValidacion();
+
     public Local() {
     }
 
@@ -44,12 +46,11 @@ public class Local {
         return nit;
     }
 
-    public void setNit(String nit){
-        try{
+    public void setNit(String nit) {
+        try {
             this.validacion.validarNit(nit);
-            this.nit=nit;
-
-        }catch (Exception error){
+            this.nit = nit;
+        }catch (Exception error) {
             System.out.println(error.getMessage());
         }
     }
